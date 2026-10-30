@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Linkedin } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { BookingLink, Icon, Mascot, Reveal, SectionHeading } from "@/components/site/Brand";
 import { Footer, Nav } from "@/components/site/Chrome";
@@ -25,6 +25,8 @@ import heart from "@/assets/icons/heart.png";
 import checklist from "@/assets/icons/checklist.png";
 import moneybag from "@/assets/icons/moneybag.png";
 import sync from "@/assets/icons/sync.png";
+import harveyPhoto from "@/assets/harvey.png.asset.json";
+import artemisPhoto from "@/assets/artemis.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,6 +53,23 @@ const SERVICES = [
   { t: "Process automation", d: "Automate repetitive workflows, data entry, document processing and internal operations.", i: gears },
   { t: "Sales and lead automation", d: "Capture, qualify and follow up with leads while keeping CRM information organised.", i: target },
   { t: "AI strategy and implementation", d: "Identify high-impact AI opportunities and implement solutions that fit your business.", i: bulb },
+];
+
+const TEAM = [
+  {
+    name: "Harvey Hill",
+    role: "CEO & Co-founder",
+    photo: harveyPhoto.url,
+    linkedin: "https://www.linkedin.com/in/harveyhill21",
+    bio: "Bristol medical student and Imperial Business School graduate with a medical background, combining scientific thinking with commercial acumen. Experienced in optimising operations in VC-backed healthtech and leading digital transformation and AI implementation across organisations employing over 8,000 people. Expert in translating complex challenges into practical, scalable solutions.",
+  },
+  {
+    name: "Artemis Webster",
+    role: "CTO & Co-founder",
+    photo: artemisPhoto.url,
+    linkedin: "https://www.linkedin.com/in/artemis-webster/",
+    bio: "Software engineer at Rolls-Royce with a background in computational chemistry and training at the Machine Learning Institute. Experienced in designing secure AI systems and building applications that improve productivity at FTSE 100 companies. Combines software engineering and machine learning expertise to turn complex business challenges into practical, intelligent solutions.",
+  },
 ];
 
 const STEPS = [
