@@ -44,7 +44,7 @@ function Contact() {
 
   const onSubmit = async (v: Values) => {
     await new Promise((r) => setTimeout(r, 500));
-    setSent(v.name.split(" ")[0]);
+    setSent(v.name.split(" ")[0] ?? v.name);
   };
 
   const Err = ({ k }: { k: keyof Values }) =>
