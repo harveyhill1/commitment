@@ -122,7 +122,7 @@ function Home() {
             <SectionHeading
               eyebrow="The problem"
               title={<>Your team has <span className="text-brand">better things</span> to do.</>}
-              intro="Too much time is spent on repetitive tasks, disconnected systems and avoidable admin. We help you get that time back."
+              intro="Too much time is spent on repetitive tasks and avoidable admin. We help you get that time back."
             />
             <div className="mt-14 grid gap-5 md:grid-cols-3">
               {PROBLEMS.map((p, k) => (
