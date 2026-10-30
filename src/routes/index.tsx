@@ -91,9 +91,9 @@ function Home() {
       <main>
         {/* HERO */}
         <section className="mx-auto max-w-7xl px-5 pb-20 pt-14 md:px-8 md:pt-20">
-          <div className="grid items-end gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="grid gap-10">
             <Reveal>
-              <h1 className="display text-[3.4rem] text-ink sm:text-7xl md:text-8xl xl:text-[8.5rem]">
+              <h1 className="display text-[3.4rem] text-ink sm:text-7xl md:text-8xl lg:text-[7.5rem] xl:text-[8.25rem]">
                 Less admin.
                 <br />
                 <span className="text-brand">Smarter processes.</span>
@@ -101,11 +101,11 @@ function Home() {
                 More <span className="slime-mark">growth.</span>
               </h1>
             </Reveal>
-            <Reveal delay={150} className="lg:pb-4">
+            <Reveal delay={150} className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <p className="max-w-[500px] text-lg leading-relaxed text-muted-foreground">
                 We help ambitious businesses automate repetitive work, improve customer experiences and unlock growth with practical AI solutions.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3">
                 <BookingLink className={buttonVariants({ variant: "pill", size: "xl" })}>Book a free consultation ↗</BookingLink>
                 <a href="#in-action" className={buttonVariants({ variant: "pillOutline", size: "xl" })}>See how it works</a>
               </div>
