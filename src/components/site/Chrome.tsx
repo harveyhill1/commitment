@@ -7,6 +7,7 @@ import { CONTACT_EMAIL, SITE_DOMAIN } from "@/lib/site-config";
 
 const NAV = [
   { label: "What we do", hash: "what-we-do" },
+  { label: "Team", hash: "team" },
   { label: "How it works", hash: "how-it-works" },
   { label: "Solutions", hash: "solutions" },
   { label: "About", hash: "about" },
@@ -71,6 +72,7 @@ export function Footer() {
         <ul className="space-y-2 text-sm">
           <li><Link to="/" hash="solutions" className="hover:text-brand">Solutions</Link></li>
           <li><Link to="/" hash="how-it-works" className="hover:text-brand">How it works</Link></li>
+          <li><Link to="/" hash="team" className="hover:text-brand">Team</Link></li>
           <li><Link to="/" hash="about" className="hover:text-brand">About</Link></li>
           <li><Link to="/contact" className="hover:text-brand">Contact</Link></li>
           <li><Link to="/privacy" className="hover:text-brand">Privacy</Link></li>

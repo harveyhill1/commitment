@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Linkedin } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { BookingLink, Icon, Mascot, Reveal, SectionHeading } from "@/components/site/Brand";
 import { Footer, Nav } from "@/components/site/Chrome";
@@ -25,6 +25,8 @@ import heart from "@/assets/icons/heart.png";
 import checklist from "@/assets/icons/checklist.png";
 import moneybag from "@/assets/icons/moneybag.png";
 import sync from "@/assets/icons/sync.png";
+import harveyPhoto from "@/assets/harvey.png.asset.json";
+import artemisPhoto from "@/assets/artemis.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,6 +53,23 @@ const SERVICES = [
   { t: "Process automation", d: "Automate repetitive workflows, data entry, document processing and internal operations.", i: gears },
   { t: "Sales and lead automation", d: "Capture, qualify and follow up with leads while keeping CRM information organised.", i: target },
   { t: "AI strategy and implementation", d: "Identify high-impact AI opportunities and implement solutions that fit your business.", i: bulb },
+];
+
+const TEAM = [
+  {
+    name: "Harvey Hill",
+    role: "CEO & Co-founder",
+    photo: harveyPhoto.url,
+    linkedin: "https://www.linkedin.com/in/harveyhill21",
+    bio: "Bristol medical student and Imperial Business School graduate with a medical background, combining scientific thinking with commercial acumen. Experienced in optimising operations in VC-backed healthtech and leading digital transformation and AI implementation across organisations employing over 8,000 people. Expert in translating complex challenges into practical, scalable solutions.",
+  },
+  {
+    name: "Artemis Webster",
+    role: "CTO & Co-founder",
+    photo: artemisPhoto.url,
+    linkedin: "https://www.linkedin.com/in/artemis-webster/",
+    bio: "Software engineer at Rolls-Royce with a background in computational chemistry and training at the Machine Learning Institute. Experienced in designing secure AI systems and building applications that improve productivity at FTSE 100 companies. Combines software engineering and machine learning expertise to turn complex business challenges into practical, intelligent solutions.",
+  },
 ];
 
 const STEPS = [
@@ -160,17 +179,29 @@ function Home() {
           </div>
         </section>
 
-        {/* IN ACTION */}
-        <section id="in-action" className="scroll-mt-20 bg-surface py-24 md:py-32">
+        {/* TEAM */}
+        <section id="team" className="scroll-mt-20 py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <SectionHeading
-              eyebrow="See Commitment in action"
-              title={<>One less task. <span className="text-brand">A lot more time.</span></>}
-              intro="Here's how a typical customer enquiry gets handled — before and after Commitment. Switch between the two to compare."
+              eyebrow="Meet the team"
+              title={<>The people behind <span className="text-brand">Commitment.</span></>}
+              intro="Harvey and Artemis founded Commitment to make practical AI something every ambitious business can use."
             />
-            <Reveal className="mt-14">
-              <WorkflowDemo />
-            </Reveal>
+            <div className="mt-14 grid gap-5 md:grid-cols-2">
+              {TEAM.map((m, k) => (
+                <Reveal key={m.name} delay={k * 100} className="lift flex flex-col gap-8 rounded-[2rem] border-2 border-ink bg-background p-8 sm:flex-row sm:items-start md:p-10">
+                  <img src={m.photo} alt={m.name} className="size-44 shrink-0 rounded-full border-2 border-ink object-cover" loading="lazy" />
+                  <div>
+                    <h3 className="display text-4xl">{m.name}</h3>
+                    <p className="display mt-1 text-lg text-brand">{m.role}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
+                    <a href={m.linkedin} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-sm font-bold transition-colors hover:text-brand">
+                      <Linkedin className="size-4" /> Connect on LinkedIn
+                    </a>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -214,6 +245,20 @@ function Home() {
                 </Reveal>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* IN ACTION */}
+        <section id="in-action" className="scroll-mt-20 bg-surface py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
+              eyebrow="See Commitment in action"
+              title={<>One less task. <span className="text-brand">A lot more time.</span></>}
+              intro="Here's how a typical customer enquiry gets handled — before and after Commitment. Switch between the two to compare."
+            />
+            <Reveal className="mt-14">
+              <WorkflowDemo />
+            </Reveal>
           </div>
         </section>
 
