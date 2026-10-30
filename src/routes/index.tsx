@@ -187,10 +187,10 @@ function Home() {
               title={<>The people behind <span className="text-brand">Commitment.</span></>}
               intro="Harvey and Artemis founded Commitment to make practical AI something every ambitious business can use."
             />
-            <div className="mt-14 grid gap-5 md:grid-cols-2">
+            <div className="mt-14 grid gap-5 lg:grid-cols-2">
               {TEAM.map((m, k) => (
                 <Reveal key={m.name} delay={k * 100} className="lift flex flex-col gap-8 rounded-[2rem] border-2 border-ink bg-background p-8 sm:flex-row sm:items-start md:p-10">
-                  <img src={m.photo} alt={m.name} className="size-44 shrink-0 rounded-full border-2 border-ink object-cover" loading="lazy" />
+                  <img src={m.photo} alt={m.name} className="size-32 shrink-0 self-center rounded-full border-2 border-ink object-cover sm:self-start lg:size-44" loading="lazy" />
                   <div>
                     <h3 className="display text-4xl">{m.name}</h3>
                     <p className="display mt-1 text-lg text-brand">{m.role}</p>
