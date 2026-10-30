@@ -248,6 +248,20 @@ function Home() {
           </div>
         </section>
 
+        {/* IN ACTION */}
+        <section id="in-action" className="scroll-mt-20 bg-surface py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
+              eyebrow="See Commitment in action"
+              title={<>One less task. <span className="text-brand">A lot more time.</span></>}
+              intro="Here's how a typical customer enquiry gets handled — before and after Commitment. Switch between the two to compare."
+            />
+            <Reveal className="mt-14">
+              <WorkflowDemo />
+            </Reveal>
+          </div>
+        </section>
+
         {/* WHY */}
         <section id="about" className="scroll-mt-20 py-24 md:py-32">
           <div className="mx-auto grid max-w-7xl gap-14 px-5 md:px-8 lg:grid-cols-2">
