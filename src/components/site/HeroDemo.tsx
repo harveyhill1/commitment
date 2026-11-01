@@ -14,7 +14,7 @@ import { Mascot } from "./Brand";
 import { cn } from "@/lib/utils";
 
 /*
- * Illustrative hero demo: Customer enquiry → native CRM → Commitment AI → response.
+ * Illustrative hero demo: Customer enquiry → native CRM → Commitment AI → automatic response.
  * Everything here is static demonstration content for a fictional business; nothing is
  * connected to a real CRM or AI backend.
  */
@@ -39,13 +39,18 @@ const STEPS = [
   {
     t: "Composes a personalised response",
     chips: ["Answers all 3 questions", "Your brand voice"],
-    note: "Draft ready",
+    note: "Response ready",
+  },
+  {
+    t: "Checks against your business rules",
+    chips: ["Verified information", "Configured permissions"],
+    note: "All checks passed",
   },
 ];
 
 // Animation timeline (ms from start). Stage numbers:
-// 1 enquiry arrives · 2 flows to Commitment · 3–5 processing steps · 6 flows back · 7 reply composing
-const TIMELINE = [250, 1050, 1700, 2650, 3600, 4500, 4900];
+// 1 enquiry arrives · 2 flows to Commitment · 3–6 processing steps · 7 flows back · 8 reply sending
+const TIMELINE = [250, 1050, 1700, 2500, 3300, 4100, 4900, 5300];
 const FINAL = TIMELINE.length;
 
 function useInView<T extends Element>() {
@@ -97,7 +102,7 @@ export function HeroDemo() {
   const replyDone = stage >= FINAL && chars >= REPLY.length;
   // Step i is active at stage 3+i and complete from stage 4+i.
   const stepState = (i: number) => (stage >= 4 + i ? "done" : stage === 3 + i ? "active" : "idle");
-  const processing = stage >= 3 && stage < 6;
+  const processing = stage >= 3 && stage < 7;
 
   return (
     <div ref={ref} className="relative">
@@ -230,21 +235,21 @@ export function HeroDemo() {
                         <p
                           className={cn(
                             "text-[11px] font-medium",
-                            stage >= 6
+                            stage >= 7
                               ? "text-ink"
                               : processing
                                 ? "text-brand"
                                 : "text-muted-foreground",
                           )}
                         >
-                          {stage >= 6
+                          {stage >= 7
                             ? "Complete"
                             : processing
                               ? "Processing enquiry…"
                               : "Waiting for enquiries"}
                         </p>
                       </div>
-                      {stage >= 6 && (
+                      {stage >= 7 && (
                         <span className="pop-in ml-auto flex size-6 items-center justify-center rounded-full bg-slime ring-1 ring-ink">
                           <Check className="size-3.5" strokeWidth={3.5} />
                         </span>
@@ -319,33 +324,39 @@ export function HeroDemo() {
                 {/* Stage 4 — response delivered back through the CRM */}
                 <Connector
                   className="lg:col-start-2 lg:row-start-2 lg:self-end lg:pb-24"
-                  active={stage >= 6}
+                  active={stage >= 7}
                   direction="left"
-                  label="Delivered back into your CRM"
+                  label="Sent automatically via your CRM"
                 />
 
                 <div className="lg:col-start-1 lg:row-start-2 lg:mt-4">
                   <div
                     className={cn(
                       "rounded-xl border bg-background p-3.5 transition-all duration-500",
-                      stage >= 6
+                      stage >= 7
                         ? "border-ink/80 opacity-100 shadow-sm"
                         : "translate-y-2 border-border opacity-0",
                     )}
                   >
                     <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                       <span className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-                        <Mascot className="h-3.5 w-auto" /> Suggested reply
+                        <Mascot className="h-3.5 w-auto" /> Reply sent via your CRM
                       </span>
                       <span
                         className={cn(
-                          "rounded-full px-2 py-0.5 text-[10px] font-bold transition-colors",
+                          "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold transition-colors",
                           replyDone
                             ? "bg-slime ring-1 ring-ink"
                             : "bg-surface text-muted-foreground",
                         )}
                       >
-                        {replyDone ? "Ready for review" : "Composing…"}
+                        {replyDone ? (
+                          <>
+                            <Check className="size-3" strokeWidth={3.5} /> Automatically resolved
+                          </>
+                        ) : (
+                          "Sending…"
+                        )}
                       </span>
                     </div>
                     <p className="min-h-[96px] leading-relaxed" aria-label={REPLY}>
@@ -357,17 +368,11 @@ export function HeroDemo() {
                         />
                       )}
                     </p>
-                    <div className="mt-3 flex flex-wrap items-center gap-2" aria-hidden="true">
-                      <span className="rounded-full bg-ink px-3 py-1.5 text-xs font-semibold text-ink-foreground">
-                        Approve & send
-                      </span>
-                      <span className="rounded-full border border-ink px-3 py-1.5 text-xs font-semibold">
-                        Edit
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-ink/80">
-                        <UserRound className="size-3" /> Hand over to team
-                      </span>
-                    </div>
+                    <p className="mt-3 flex items-start gap-1.5 border-t border-border pt-2.5 text-[11px] leading-snug text-muted-foreground">
+                      <UserRound className="mt-px size-3 shrink-0" />
+                      Enquiries outside the agent's knowledge or permissions are escalated to your
+                      team.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -391,7 +396,7 @@ export function HeroDemo() {
       <div className="mx-auto h-3 w-48 rounded-t-xl border-[3px] border-ink bg-surface" />
 
       <div className="absolute -right-3 -top-6 hidden rotate-6 rounded-full border-2 border-ink bg-slime px-4 py-2 text-xs font-bold shadow-pop md:block">
-        Human stays in control ✓
+        Checked against your rules ✓
       </div>
     </div>
   );

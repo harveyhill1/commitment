@@ -42,7 +42,7 @@ export const Route = createFileRoute("/")({
 
 const STATS = [
   {
-    n: <span className="text-brand">30–45%</span>,
+    n: <span className="text-ink">30–45%</span>,
     d: (
       <>
         Potential <span className="slime-mark">productivity gains</span> equivalent to current
@@ -68,8 +68,8 @@ const STATS = [
   {
     n: (
       <>
-        <span className="text-brand">22%</span>{" "}
-        <span className="align-middle text-[0.45em] text-muted-foreground">vs</span>{" "}
+        <span className="text-ink">22%</span>{" "}
+        <span className="align-middle text-[0.45em] text-ink">vs</span>{" "}
         <span className="text-ink">40%</span>
       </>
     ),
@@ -312,10 +312,6 @@ function Home() {
                   delay={k * 100}
                   className="@container flex flex-col rounded-3xl border border-border bg-background p-8 md:min-h-[380px] md:p-10"
                 >
-                  <span
-                    aria-hidden="true"
-                    className="mb-6 block h-2 w-12 rounded-full bg-slime ring-1 ring-ink"
-                  />
                   <p className="display whitespace-nowrap" style={{ fontSize: s.size }}>
                     {s.n}
                   </p>
@@ -339,7 +335,6 @@ function Home() {
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 md:px-8 lg:grid-cols-[1fr_1fr] lg:gap-20">
             <div>
               <SectionHeading
-                eyebrow="What you get"
                 title={
                   <>
                     Customer service agents that feel like{" "}
@@ -376,17 +371,61 @@ function Home() {
           </div>
         </section>
 
-        {/* 4 · HOW WE DO IT */}
-        <section id="how-it-works" className="scroll-mt-20 py-24 md:py-32">
+        {/* 4 · ABOUT / TEAM */}
+        <section id="about" className="scroll-mt-20 py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <SectionHeading
-              eyebrow="Our methodology"
+              title={
+                <>
+                  The people behind <span className="text-brand">Commitment.</span>
+                </>
+              }
+              intro="Harvey and Artemis founded Commitment to bring exceptional, AI-powered customer service within reach of every ambitious business."
+            />
+            <div className="mt-14 grid gap-5 lg:grid-cols-2">
+              {TEAM.map((m, k) => (
+                <Reveal
+                  key={m.name}
+                  delay={k * 100}
+                  className="lift flex flex-col gap-8 rounded-[2rem] border-2 border-ink bg-background p-8 sm:flex-row sm:items-start md:p-10"
+                >
+                  <img
+                    src={m.photo}
+                    alt={`Portrait of ${m.name}`}
+                    width={176}
+                    height={176}
+                    className="size-36 shrink-0 self-center rounded-2xl border-2 border-ink bg-surface object-cover sm:self-start lg:size-44"
+                    loading="lazy"
+                  />
+                  <div>
+                    <h3 className="display text-4xl">{m.name}</h3>
+                    <p className="display mt-1 text-lg text-brand">{m.role}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
+                    <a
+                      href={m.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-bold transition-colors hover:text-brand"
+                    >
+                      <Linkedin className="size-4" /> Connect on LinkedIn
+                    </a>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 5 · HOW WE DO IT */}
+        <section id="how-it-works" className="scroll-mt-20 bg-paper py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
               title={
                 <>
                   How we <span className="text-brand">do it.</span>
                 </>
               }
-              intro="Great AI agents don't happen by accident. We combine business strategy, customer understanding and technical expertise to build agents that actually work."
+              intro="We combine business strategy, customer understanding and technical expertise to build agents that actually work."
             />
             <div className="mt-14 grid gap-5 md:grid-cols-2">
               {METHOD.map((m, k) => (
@@ -400,7 +439,6 @@ function Home() {
         <section id="value" className="scroll-mt-20 py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <SectionHeading
-              eyebrow="The Commitment value"
               title={
                 <>
                   Your CRM's AI agent. <span className="text-brand">Or Commitment.</span>
@@ -498,7 +536,6 @@ function Home() {
         <section id="who-we-help" className="scroll-mt-20 bg-paper py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <SectionHeading
-              eyebrow="Who we help"
               title={
                 <>
                   Built for <span className="text-brand">ambitious</span> businesses.
@@ -518,52 +555,6 @@ function Home() {
                   </div>
                   <h3 className="display mt-6 text-3xl">{s.t}</h3>
                   <p className="mt-3 text-muted-foreground">{s.d}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 8 · ABOUT */}
-        <section id="about" className="scroll-mt-20 py-24 md:py-32">
-          <div className="mx-auto max-w-7xl px-5 md:px-8">
-            <SectionHeading
-              eyebrow="About Commitment"
-              title={
-                <>
-                  The people behind <span className="text-brand">Commitment.</span>
-                </>
-              }
-              intro="Harvey and Artemis founded Commitment to bring exceptional, AI-powered customer service within reach of every ambitious business."
-            />
-            <div className="mt-14 grid gap-5 lg:grid-cols-2">
-              {TEAM.map((m, k) => (
-                <Reveal
-                  key={m.name}
-                  delay={k * 100}
-                  className="lift flex flex-col gap-8 rounded-[2rem] border-2 border-ink bg-background p-8 sm:flex-row sm:items-start md:p-10"
-                >
-                  <img
-                    src={m.photo}
-                    alt={`Portrait of ${m.name}`}
-                    width={176}
-                    height={176}
-                    className="size-36 shrink-0 self-center rounded-2xl border-2 border-ink bg-surface object-cover sm:self-start lg:size-44"
-                    loading="lazy"
-                  />
-                  <div>
-                    <h3 className="display text-4xl">{m.name}</h3>
-                    <p className="display mt-1 text-lg text-brand">{m.role}</p>
-                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
-                    <a
-                      href={m.linkedin}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-5 inline-flex items-center gap-2 text-sm font-bold transition-colors hover:text-brand"
-                    >
-                      <Linkedin className="size-4" /> Connect on LinkedIn
-                    </a>
-                  </div>
                 </Reveal>
               ))}
             </div>
