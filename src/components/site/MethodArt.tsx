@@ -67,7 +67,8 @@ function Tick({ className }: { className?: string }) {
   );
 }
 
-const box = "relative h-40 w-full max-w-[260px] md:h-44";
+/** Shared illustration frame: identical size for all four method cards, centred by its parent. */
+const box = "relative h-40 w-[240px] max-w-full md:h-44 md:w-[260px]";
 
 /** 01 Understand — customer journey: connected message bubbles leading to a priority target. */
 export function UnderstandArt() {

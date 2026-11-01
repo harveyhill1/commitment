@@ -43,14 +43,24 @@ export const Route = createFileRoute("/")({
 const STATS = [
   {
     n: <span className="text-brand">30–45%</span>,
-    d: "Potential productivity gains equivalent to current customer care costs through generative AI.",
+    d: (
+      <>
+        Potential <span className="slime-mark">productivity gains</span> equivalent to current
+        customer care costs through generative AI.
+      </>
+    ),
     size: "clamp(3rem, 25cqi, 6rem)",
     src: "McKinsey & Company",
     href: "https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier",
   },
   {
     n: <span className="text-ink">67%</span>,
-    d: "Of UK businesses adopting AI report limited skills, expertise or knowledge as a barrier.",
+    d: (
+      <>
+        Of UK businesses adopting AI report{" "}
+        <span className="slime-mark">limited skills, expertise or knowledge</span> as a barrier.
+      </>
+    ),
     size: "clamp(3rem, 25cqi, 6rem)",
     src: "UK Government, AI Adoption Survey 2026",
     href: "https://www.gov.uk/government/publications/ai-adoption-survey-2026/ai-adoption-survey-report-2026-executive-summary",
@@ -63,7 +73,11 @@ const STATS = [
         <span className="text-ink">40%</span>
       </>
     ),
-    d: "Smaller versus large organisations scaling AI agents.",
+    d: (
+      <>
+        Smaller versus large organisations <span className="slime-mark">scaling AI agents.</span>
+      </>
+    ),
     size: "clamp(2.5rem, 19cqi, 5rem)",
     src: "McKinsey, August 2026",
     href: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
@@ -193,15 +207,15 @@ function MethodCard({ m, k }: { m: (typeof METHOD)[number]; k: number }) {
   return (
     <Reveal
       delay={k * 80}
-      className="lift group flex flex-col gap-8 rounded-[2rem] border-2 border-ink bg-background p-8 md:min-h-[440px] md:p-10"
+      className="lift group flex h-full flex-col gap-8 rounded-[2rem] border-2 border-ink bg-background p-6 md:p-8"
     >
-      <div className="flex items-start justify-between gap-4">
-        <div className="w-full max-w-[260px] transition-transform duration-500 group-hover:-translate-y-1">
+      <div className="relative flex h-56 items-center justify-center overflow-hidden rounded-2xl bg-surface md:h-60">
+        <span className="display absolute left-4 top-4 text-xl text-brand">0{k + 1}</span>
+        <div className="transition-transform duration-500 group-hover:-translate-y-1">
           <m.Art />
         </div>
-        <span className="display text-2xl text-brand">0{k + 1}</span>
       </div>
-      <div className="mt-auto">
+      <div>
         <h3 className="display text-4xl md:text-5xl">
           <span className={k % 2 ? "slime-mark" : ""}>{m.stage}</span>
         </h3>
@@ -251,10 +265,6 @@ function Home() {
         <section className="mx-auto max-w-7xl px-5 pb-20 pt-14 md:px-8 md:pt-20">
           <div className="grid gap-10">
             <Reveal>
-              <p className="mb-6 inline-flex items-center gap-2 rounded-full border-2 border-ink px-3 py-1 text-xs font-semibold uppercase tracking-widest">
-                <span className="size-2 rounded-full bg-slime ring-1 ring-ink" /> Bespoke customer
-                service agents
-              </p>
               <h1 className="display max-w-6xl text-[2.9rem] leading-[1.02] text-ink sm:text-6xl md:text-7xl xl:text-8xl">
                 Unlock the <span className="text-brand">next generation</span> of customer service.
               </h1>
@@ -289,10 +299,9 @@ function Home() {
         <section id="opportunity" className="scroll-mt-20 py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <SectionHeading
-              eyebrow="The opportunity"
               title={
                 <>
-                  The opportunity is <span className="text-brand">enormous.</span>
+                  The <span className="text-brand">opportunity.</span>
                 </>
               }
             />
@@ -303,6 +312,10 @@ function Home() {
                   delay={k * 100}
                   className="@container flex flex-col rounded-3xl border border-border bg-background p-8 md:min-h-[380px] md:p-10"
                 >
+                  <span
+                    aria-hidden="true"
+                    className="mb-6 block h-2 w-12 rounded-full bg-slime ring-1 ring-ink"
+                  />
                   <p className="display whitespace-nowrap" style={{ fontSize: s.size }}>
                     {s.n}
                   </p>
@@ -321,52 +334,7 @@ function Home() {
           </div>
         </section>
 
-        {/* 3 · THE SOLUTION */}
-        <section id="solution" className="scroll-mt-20 bg-paper py-24 md:py-32">
-          <div className="mx-auto max-w-7xl px-5 md:px-8">
-            <SectionHeading
-              eyebrow="The solution"
-              title={
-                <>
-                  Better service. Less effort. <span className="text-brand">Greater value.</span>
-                </>
-              }
-              intro="We help SMEs deliver better customer service through bespoke AI agents, unlocking productivity gains at exceptional value without compromising on quality."
-            />
-            <Reveal
-              delay={150}
-              className="mt-16 flex flex-col gap-8 border-t-2 border-ink pt-10 md:flex-row md:items-center md:justify-between"
-            >
-              <p className="display max-w-4xl text-3xl leading-tight md:text-5xl">
-                Your business knowledge. Our expertise.{" "}
-                <span className="text-brand">Better customer experiences.</span>
-              </p>
-              <Mascot idle className="h-28 w-auto shrink-0 self-end md:h-36 md:self-auto" />
-            </Reveal>
-          </div>
-        </section>
-
-        {/* 4 · HOW WE DO IT */}
-        <section id="how-it-works" className="scroll-mt-20 py-24 md:py-32">
-          <div className="mx-auto max-w-7xl px-5 md:px-8">
-            <SectionHeading
-              eyebrow="Our methodology"
-              title={
-                <>
-                  How we <span className="text-brand">do it.</span>
-                </>
-              }
-              intro="Great AI agents don't happen by accident. We combine business strategy, customer understanding and technical expertise to build agents that actually work."
-            />
-            <div className="mt-14 grid gap-5 md:grid-cols-2">
-              {METHOD.map((m, k) => (
-                <MethodCard key={m.stage} m={m} k={k} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 5 · AGENTS THAT FEEL LIKE HUMANS */}
+        {/* 3 · WHAT YOU GET — AGENTS THAT FEEL LIKE HUMANS */}
         <section id="agents" className="scroll-mt-20 bg-paper py-24 md:py-32">
           <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 md:px-8 lg:grid-cols-[1fr_1fr] lg:gap-20">
             <div>
@@ -374,7 +342,8 @@ function Home() {
                 eyebrow="What you get"
                 title={
                   <>
-                    Agents that feel like <span className="text-brand">humans.</span>
+                    Customer service agents that feel like{" "}
+                    <span className="text-brand">humans.</span>
                   </>
                 }
                 intro="Intelligent customer service, built around your business and designed to deliver the personal experience your customers expect."
@@ -404,6 +373,26 @@ function Home() {
             <Reveal delay={200}>
               <ConversationVisual />
             </Reveal>
+          </div>
+        </section>
+
+        {/* 4 · HOW WE DO IT */}
+        <section id="how-it-works" className="scroll-mt-20 py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
+              eyebrow="Our methodology"
+              title={
+                <>
+                  How we <span className="text-brand">do it.</span>
+                </>
+              }
+              intro="Great AI agents don't happen by accident. We combine business strategy, customer understanding and technical expertise to build agents that actually work."
+            />
+            <div className="mt-14 grid gap-5 md:grid-cols-2">
+              {METHOD.map((m, k) => (
+                <MethodCard key={m.stage} m={m} k={k} />
+              ))}
+            </div>
           </div>
         </section>
 
@@ -582,7 +571,7 @@ function Home() {
         </section>
 
         {/* 9 · CTA */}
-        <section className="relative overflow-hidden bg-brand py-24 md:py-32">
+        <section className="bg-brand py-24 md:py-32">
           <div className="mx-auto max-w-7xl px-5 md:px-8">
             <div className="relative max-w-3xl">
               <Reveal>
@@ -605,10 +594,6 @@ function Home() {
               </Reveal>
             </div>
           </div>
-          <Mascot
-            idle
-            className="pointer-events-none absolute -bottom-6 right-4 hidden h-[26rem] w-auto md:block lg:right-24"
-          />
         </section>
       </main>
       <Footer />
