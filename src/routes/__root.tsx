@@ -79,7 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Commitment" },
-      { name: "description", content: "Practical AI and automation for growing businesses." },
+      { name: "description", content: "Bespoke AI customer service agents for SMEs — designed, integrated with your CRM and continuously improved." },
       { name: "author", content: "Commitment" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

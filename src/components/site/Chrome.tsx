@@ -4,12 +4,12 @@ import { Menu, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { BookingLink, Logo } from "./Brand";
 import { CONTACT_EMAIL, SITE_DOMAIN } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
 
 const NAV = [
-  { label: "What we do", hash: "what-we-do" },
-  { label: "Team", hash: "team" },
-  { label: "How it works", hash: "how-it-works" },
-  { label: "Solutions", hash: "solutions" },
+  { label: "How we do it", hash: "how-it-works" },
+  { label: "Why Commitment", hash: "value" },
+  { label: "Who we help", hash: "who-we-help" },
   { label: "About", hash: "about" },
 ] as const;
 
@@ -30,7 +30,7 @@ export function Nav() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
-          <BookingLink className={buttonVariants({ variant: "pill", size: "pill", className: "hidden sm:inline-flex" })}>
+          <BookingLink className={cn(buttonVariants({ variant: "pill", size: "pill" }), "hidden sm:inline-flex")}>
             Let's talk ↗
           </BookingLink>
           <button
@@ -66,14 +66,13 @@ export function Footer() {
         <div>
           <Logo size="lg" />
           <p className="display mt-5 text-2xl">
-            Less admin. <span className="text-brand">More growth.</span>
+            Better service. <span className="text-brand">Less effort.</span>
           </p>
         </div>
         <ul className="space-y-2 text-sm">
-          <li><Link to="/" hash="solutions" className="hover:text-brand">Solutions</Link></li>
-          <li><Link to="/" hash="how-it-works" className="hover:text-brand">How it works</Link></li>
-          <li><Link to="/" hash="team" className="hover:text-brand">Team</Link></li>
-          <li><Link to="/" hash="about" className="hover:text-brand">About</Link></li>
+          {NAV.map((n) => (
+            <li key={n.hash}><Link to="/" hash={n.hash} className="hover:text-brand">{n.label}</Link></li>
+          ))}
           <li><Link to="/contact" className="hover:text-brand">Contact</Link></li>
           <li><Link to="/privacy" className="hover:text-brand">Privacy</Link></li>
         </ul>
