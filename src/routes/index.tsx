@@ -180,6 +180,71 @@ function Home() {
                 </Reveal>
               ))}
             </div>
+            <div className="mt-5 grid gap-5 md:grid-cols-3">
+              {STATS.map((s, k) => (
+                <Reveal key={s.n} delay={k * 100} className="rounded-3xl border-2 border-ink bg-slime p-7">
+                  <p className="display text-5xl text-ink">{s.n}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink/80">{s.d}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SOLUTION */}
+        <section id="solution" className="scroll-mt-20 py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
+              eyebrow="The solution"
+              title={<>Better customer service, <span className="text-brand">without compromise.</span></>}
+              intro="We help SMEs deliver better customer service using AI, achieving significant productivity gains at unparalleled value, without compromising on quality."
+            />
+            <Reveal className="mt-14 overflow-hidden rounded-[2rem] border-2 border-ink">
+              <div className="grid bg-ink text-ink-foreground md:grid-cols-[1fr_1.4fr]">
+                <p className="display p-6 text-xl md:p-8">The Commitment process</p>
+                <p className="display hidden p-6 text-xl md:block md:p-8">What you get</p>
+              </div>
+              {PROCESS.map((row) => (
+                <div key={row.t} className="grid border-t-2 border-ink bg-background md:grid-cols-[1fr_1.4fr]">
+                  <p className="display p-6 pb-2 text-xl md:p-8">{row.t}</p>
+                  <p className="p-6 pt-0 text-muted-foreground md:p-8 md:pt-8">{row.d}</p>
+                </div>
+              ))}
+            </Reveal>
+            <Reveal delay={150} className="mt-12">
+              <p className="display max-w-4xl text-3xl leading-snug md:text-4xl">
+                We provide knowledge-base support, done-for-you implementation and ongoing improvement of customer service agents.{" "}
+                <span className="text-brand">So you can focus on what you do best.</span>
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* VALUE */}
+        <section className="bg-paper py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
+              eyebrow="The Commitment value"
+              title={<>More than your CRM's <span className="text-brand">own agent.</span></>}
+            />
+            <Reveal className="mt-14 overflow-hidden rounded-[2rem] border-2 border-ink">
+              <div className="grid grid-cols-[1fr_auto_auto] items-stretch bg-ink text-ink-foreground">
+                <p className="display p-5 text-lg md:p-7 md:text-xl" aria-hidden="true" />
+                <p className="display flex w-24 items-center justify-center p-5 text-center text-sm md:w-44 md:p-7 md:text-xl">Your CRM's own agent</p>
+                <p className="display flex w-24 items-center justify-center bg-slime p-5 text-center text-sm text-ink md:w-44 md:p-7 md:text-xl">Commitment</p>
+              </div>
+              {VALUE.map((v) => (
+                <div key={v.t} className="grid grid-cols-[1fr_auto_auto] items-stretch border-t-2 border-ink bg-background">
+                  <p className="flex items-center p-5 font-medium md:p-7 md:text-lg">{v.t}</p>
+                  <span className="flex w-24 items-center justify-center p-5 md:w-44 md:p-7">
+                    {v.crm ? <Check className="size-6 text-ink" strokeWidth={3} /> : <X className="size-6 text-muted-foreground" strokeWidth={3} />}
+                  </span>
+                  <span className="flex w-24 items-center justify-center bg-slime p-5 md:w-44 md:p-7">
+                    <Check className="size-6 text-ink" strokeWidth={3} />
+                  </span>
+                </div>
+              ))}
+            </Reveal>
           </div>
         </section>
 
