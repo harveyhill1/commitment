@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, Linkedin } from "lucide-react";
+import { ArrowUpRight, Check, Linkedin, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { BookingLink, Icon, Mascot, Reveal, SectionHeading } from "@/components/site/Brand";
 import { Footer, Nav } from "@/components/site/Chrome";
@@ -31,10 +31,10 @@ import artemisPhoto from "@/assets/artemis.png.asset.json";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Commitment — Practical AI & automation for growing businesses" },
-      { name: "description", content: "Less admin. Smarter processes. More growth. Commitment helps SMEs automate repetitive work and improve customer experiences with practical AI." },
-      { property: "og:title", content: "Commitment — Less admin. Smarter processes. More growth." },
-      { property: "og:description", content: "Practical AI and automation for small and medium-sized businesses." },
+      { title: "Commitment — Customer service agents. Unbeatable value." },
+      { name: "description", content: "Bespoke AI agents for SMEs that boost customer service handling time by 50% — at one-third the price of native CRM agents — or your money back." },
+      { property: "og:title", content: "Commitment — Customer service agents. Unbeatable value. Exceptional customer experience." },
+      { property: "og:description", content: "Bespoke AI customer service agents for SMEs at one-third the price of native CRM agents — or your money back." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -61,7 +61,7 @@ const TEAM = [
     role: "CEO & Co-founder",
     photo: harveyPhoto.url,
     linkedin: "https://www.linkedin.com/in/harveyhill21",
-    bio: "Bristol medical student and Imperial Business School graduate with a medical background, combining scientific thinking with commercial acumen. Experienced in optimising operations in VC-backed healthtech and leading digital transformation and AI implementation across organisations employing over 8,000 people. Expert in translating complex challenges into practical, scalable solutions.",
+    bio: "Imperial Business School graduate with a medical background, combining scientific thinking with commercial acumen. Experienced in optimising operations in VC-backed healthtech and leading digital transformation and AI implementation across organisations employing over 8,000 people. Expert in translating complex challenges into practical, scalable solutions.",
   },
   {
     name: "Artemis Webster",
@@ -94,6 +94,31 @@ const WHY = [
   { t: "Focused on measurable business outcomes", i: target },
 ];
 
+const STATS = [
+  { n: "30–45%", d: "McKinsey estimates that generative AI could deliver productivity gains equivalent to 30–45% of current customer care costs." },
+  { n: "67%", d: "Of UK businesses adopting AI, 67% report limited AI skills, expertise or knowledge as a barrier. (GOV.UK)" },
+  { n: "22% vs 40%", d: "McKinsey's August 2026 research found that 22% of smaller organisations were scaling AI agents, compared with 40% of large organisations." },
+];
+
+const PROCESS = [
+  { t: "Customer journey mapping", d: "An agent designed around how customers actually seek help" },
+  { t: "Impact–effort prioritisation", d: "The most valuable enquiries automated first" },
+  { t: "Knowledge gap analysis", d: "Missing policies, FAQs and instructions identified before launch, so customers only receive correct information" },
+  { t: "Service blueprinting", d: "Clear connections between the agent, CRM and human team" },
+  { t: "Performance scorecard", d: "Agreed measures such as answer accuracy, resolution rate and cost per resolution" },
+];
+
+const VALUE = [
+  { t: "Answers questions using your business knowledge", crm: true },
+  { t: "Connects customer conversations to your CRM", crm: true },
+  { t: "Identifies gaps in your knowledge before launch", crm: false },
+  { t: "Helps write and structure your knowledge base for better answers", crm: false },
+  { t: "Maps your customer enquiries to identify what to automate first", crm: false },
+  { t: "Designs when and how the agent hands over to your team", crm: false },
+  { t: "Tests realistic customer scenarios before going live", crm: false },
+  { t: "Reviews performance and improves answers after launch", crm: false },
+];
+
 function Arrow({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 120 40" className={className} fill="none" aria-hidden="true">
@@ -112,17 +137,17 @@ function Home() {
         <section className="mx-auto max-w-7xl px-5 pb-20 pt-14 md:px-8 md:pt-20">
           <div className="grid gap-10">
             <Reveal>
-              <h1 className="display text-[3.4rem] text-ink sm:text-7xl md:text-8xl lg:text-[7.5rem] xl:text-[8.25rem]">
-                Less admin.
+              <h1 className="display text-[2.9rem] leading-[1.02] text-ink sm:text-6xl md:text-7xl xl:text-8xl">
+                Customer service agents.
                 <br />
-                <span className="text-brand">Smarter processes.</span>
+                <span className="text-brand">Unbeatable value.</span>
                 <br />
-                More <span className="slime-mark">growth.</span>
+                Exceptional <span className="slime-mark">customer experience.</span>
               </h1>
             </Reveal>
             <Reveal delay={150} className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
               <p className="max-w-[500px] text-lg leading-relaxed text-muted-foreground">
-                We help ambitious businesses automate repetitive work, improve customer experiences and unlock growth with practical AI solutions.
+                Bespoke AI agents for SMEs that boost customer service handling time by 50% — at one-third the price of native CRM agents — or your money back.
               </p>
               <div className="flex flex-wrap gap-3">
                 <BookingLink className={buttonVariants({ variant: "pill", size: "xl" })}>Book a free consultation ↗</BookingLink>
@@ -155,6 +180,71 @@ function Home() {
                 </Reveal>
               ))}
             </div>
+            <div className="mt-5 grid gap-5 md:grid-cols-3">
+              {STATS.map((s, k) => (
+                <Reveal key={s.n} delay={k * 100} className="rounded-3xl border-2 border-ink bg-slime p-7">
+                  <p className="display text-5xl text-ink">{s.n}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink/80">{s.d}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SOLUTION */}
+        <section id="solution" className="scroll-mt-20 py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
+              eyebrow="The solution"
+              title={<>Better customer service, <span className="text-brand">without compromise.</span></>}
+              intro="We help SMEs deliver better customer service using AI, achieving significant productivity gains at unparalleled value, without compromising on quality."
+            />
+            <Reveal className="mt-14 overflow-hidden rounded-[2rem] border-2 border-ink">
+              <div className="grid bg-ink text-ink-foreground md:grid-cols-[1fr_1.4fr]">
+                <p className="display p-6 text-xl md:p-8">The Commitment process</p>
+                <p className="display hidden p-6 text-xl md:block md:p-8">What you get</p>
+              </div>
+              {PROCESS.map((row) => (
+                <div key={row.t} className="grid border-t-2 border-ink bg-background md:grid-cols-[1fr_1.4fr]">
+                  <p className="display p-6 pb-2 text-xl md:p-8">{row.t}</p>
+                  <p className="p-6 pt-0 text-muted-foreground md:p-8 md:pt-8">{row.d}</p>
+                </div>
+              ))}
+            </Reveal>
+            <Reveal delay={150} className="mt-12">
+              <p className="display max-w-4xl text-3xl leading-snug md:text-4xl">
+                We provide knowledge-base support, done-for-you implementation and ongoing improvement of customer service agents.{" "}
+                <span className="text-brand">So you can focus on what you do best.</span>
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* VALUE */}
+        <section className="bg-paper py-24 md:py-32">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
+              eyebrow="The Commitment value"
+              title={<>More than your CRM's <span className="text-brand">own agent.</span></>}
+            />
+            <Reveal className="mt-14 overflow-hidden rounded-[2rem] border-2 border-ink">
+              <div className="grid grid-cols-[1fr_auto_auto] items-stretch bg-ink text-ink-foreground">
+                <p className="display p-5 text-lg md:p-7 md:text-xl" aria-hidden="true" />
+                <p className="display flex w-24 items-center justify-center p-5 text-center text-sm md:w-44 md:p-7 md:text-xl">Your CRM's own agent</p>
+                <p className="display flex w-24 items-center justify-center bg-slime p-5 text-center text-sm text-ink md:w-44 md:p-7 md:text-xl">Commitment</p>
+              </div>
+              {VALUE.map((v) => (
+                <div key={v.t} className="grid grid-cols-[1fr_auto_auto] items-stretch border-t-2 border-ink bg-background">
+                  <p className="flex items-center p-5 font-medium md:p-7 md:text-lg">{v.t}</p>
+                  <span className="flex w-24 items-center justify-center p-5 md:w-44 md:p-7">
+                    {v.crm ? <Check className="size-6 text-ink" strokeWidth={3} /> : <X className="size-6 text-muted-foreground" strokeWidth={3} />}
+                  </span>
+                  <span className="flex w-24 items-center justify-center bg-slime p-5 md:w-44 md:p-7">
+                    <Check className="size-6 text-ink" strokeWidth={3} />
+                  </span>
+                </div>
+              ))}
+            </Reveal>
           </div>
         </section>
 
