@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, type ComponentType } from "react";
-import { ArrowUpRight, Check, Linkedin, Plus } from "lucide-react";
+import { type ComponentType } from "react";
+import { ArrowUpRight, Check, Linkedin } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { BookingLink, Icon, Mascot, Reveal, SectionHeading } from "@/components/site/Brand";
 import { Footer, Nav } from "@/components/site/Chrome";
@@ -40,6 +40,9 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+/** One shared size for every headline statistic, scaled to the card width (container query units). */
+const STAT_SIZE = "min(19cqi, 5rem)";
+
 const STATS = [
   {
     n: <span className="text-ink">30–45%</span>,
@@ -49,7 +52,6 @@ const STATS = [
         customer care costs through generative AI.
       </>
     ),
-    size: "clamp(3rem, 25cqi, 6rem)",
     src: "McKinsey & Company",
     href: "https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/the-economic-potential-of-generative-ai-the-next-productivity-frontier",
   },
@@ -61,7 +63,6 @@ const STATS = [
         <span className="slime-mark">limited skills, expertise or knowledge</span> as a barrier.
       </>
     ),
-    size: "clamp(3rem, 25cqi, 6rem)",
     src: "UK Government, AI Adoption Survey 2026",
     href: "https://www.gov.uk/government/publications/ai-adoption-survey-2026/ai-adoption-survey-report-2026-executive-summary",
   },
@@ -78,40 +79,34 @@ const STATS = [
         Smaller versus large organisations <span className="slime-mark">scaling AI agents.</span>
       </>
     ),
-    size: "clamp(2.5rem, 19cqi, 5rem)",
     src: "McKinsey, August 2026",
     href: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai",
   },
 ];
 
-const METHOD: { stage: string; t: string; d: string; benefit: string; Art: ComponentType }[] = [
+const METHOD: { stage: string; t: string; d: string; Art: ComponentType }[] = [
   {
     stage: "Understand",
     t: "Customer journey mapping & prioritisation",
     d: "We map how customers seek help and identify which enquiries offer the greatest opportunity for automation.",
-    benefit:
-      "An agent designed around real customer needs, with the highest-value enquiries prioritised first.",
     Art: UnderstandArt,
   },
   {
     stage: "Prepare",
     t: "Knowledge gap analysis & optimisation",
     d: "We identify missing information, structure your knowledge base and help develop the content your agent needs to provide reliable answers.",
-    benefit: "More accurate, consistent responses grounded in your business knowledge.",
     Art: PrepareArt,
   },
   {
     stage: "Integrate",
     t: "Service blueprinting & implementation",
     d: "We design how the agent interacts with your CRM, communication channels and human team, including escalation and handover processes.",
-    benefit: "A seamless customer experience that works with your existing systems.",
     Art: IntegrateArt,
   },
   {
     stage: "Improve",
     t: "Testing, performance & optimisation",
     d: "We test realistic customer scenarios, establish performance metrics and continually refine your agent using reviewed conversations and feedback.",
-    benefit: "An agent that becomes more effective over time through managed improvements.",
     Art: ImproveArt,
   },
 ];
@@ -202,8 +197,6 @@ function Dash() {
 }
 
 function MethodCard({ m, k }: { m: (typeof METHOD)[number]; k: number }) {
-  const [open, setOpen] = useState(false);
-  const id = `method-${k}`;
   return (
     <Reveal
       delay={k * 80}
@@ -221,36 +214,6 @@ function MethodCard({ m, k }: { m: (typeof METHOD)[number]; k: number }) {
         </h3>
         <p className="mt-3 text-lg font-bold leading-snug">{m.t}</p>
         <p className="mt-2 max-w-md text-muted-foreground">{m.d}</p>
-        <button
-          type="button"
-          onClick={() => setOpen((o) => !o)}
-          aria-expanded={open}
-          aria-controls={id}
-          className="mt-5 inline-flex items-center gap-2 text-sm font-bold transition-colors hover:text-brand"
-        >
-          <span
-            className={cn(
-              "flex size-6 items-center justify-center rounded-full border-2 border-ink transition-transform duration-300",
-              open && "rotate-45 bg-slime",
-            )}
-          >
-            <Plus className="size-3.5" strokeWidth={3} />
-          </span>
-          Customer benefit
-        </button>
-        <div
-          id={id}
-          className={cn(
-            "grid transition-all duration-500",
-            open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
-          )}
-        >
-          <div className="overflow-hidden">
-            <p className="mt-4 max-w-md border-l-4 border-slime pl-4 font-medium text-ink">
-              {m.benefit}
-            </p>
-          </div>
-        </div>
       </div>
     </Reveal>
   );
@@ -305,14 +268,17 @@ function Home() {
                 </>
               }
             />
-            <div className="mt-14 grid gap-5 md:grid-cols-3">
+            <div className="mt-14 grid gap-5 lg:grid-cols-3">
               {STATS.map((s, k) => (
                 <Reveal
                   key={s.src}
                   delay={k * 100}
-                  className="@container flex flex-col rounded-3xl border border-border bg-background p-8 md:min-h-[380px] md:p-10"
+                  className="@container flex flex-col rounded-3xl border border-border bg-background p-7 lg:min-h-[380px] lg:p-8"
                 >
-                  <p className="display whitespace-nowrap" style={{ fontSize: s.size }}>
+                  <p
+                    className="display whitespace-nowrap leading-none"
+                    style={{ fontSize: STAT_SIZE }}
+                  >
                     {s.n}
                   </p>
                   <p className="mt-6 max-w-xs text-lg leading-snug text-ink/80">{s.d}</p>
@@ -332,42 +298,44 @@ function Home() {
 
         {/* 3 · WHAT YOU GET — AGENTS THAT FEEL LIKE HUMANS */}
         <section id="agents" className="scroll-mt-20 bg-paper py-24 md:py-32">
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 md:px-8 lg:grid-cols-[1fr_1fr] lg:gap-20">
-            <div>
-              <SectionHeading
-                title={
-                  <>
-                    Customer service agents that feel like{" "}
-                    <span className="text-brand">humans.</span>
-                  </>
-                }
-                intro="Intelligent customer service, built around your business and designed to deliver the personal experience your customers expect."
-              />
-              <ol className="mt-12 divide-y-2 divide-ink border-y-2 border-ink">
-                {PILLARS.map((p, k) => (
-                  <Reveal
-                    as="li"
-                    key={p.n}
-                    delay={k * 120}
-                    className="grid grid-cols-[3.5rem_1fr] gap-4 py-6"
-                  >
-                    <span className="display text-3xl text-brand">{p.n}</span>
-                    <div>
-                      <h3 className="display text-3xl">{p.t}</h3>
-                      <p className="mt-2 text-muted-foreground">{p.d}</p>
-                    </div>
-                  </Reveal>
-                ))}
-              </ol>
-              <Reveal delay={300}>
-                <p className="display mt-10 text-3xl md:text-4xl">
-                  So you can focus on <span className="slime-mark">what you do best.</span>
-                </p>
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <SectionHeading
+              className="max-w-6xl"
+              title={
+                <>
+                  Customer service agents that feel like <span className="text-brand">humans.</span>
+                </>
+              }
+              intro="Intelligent customer service, built around your business and designed to deliver the personal experience your customers expect."
+            />
+            <div className="mt-14 grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
+              <div>
+                <ol className="divide-y-2 divide-ink border-y-2 border-ink">
+                  {PILLARS.map((p, k) => (
+                    <Reveal
+                      as="li"
+                      key={p.n}
+                      delay={k * 120}
+                      className="grid grid-cols-[3.5rem_1fr] gap-4 py-6"
+                    >
+                      <span className="display text-3xl text-brand">{p.n}</span>
+                      <div>
+                        <h3 className="display text-3xl">{p.t}</h3>
+                        <p className="mt-2 text-muted-foreground">{p.d}</p>
+                      </div>
+                    </Reveal>
+                  ))}
+                </ol>
+                <Reveal delay={300}>
+                  <p className="display mt-10 text-3xl md:text-4xl">
+                    So you can focus on <span className="slime-mark">what you do best.</span>
+                  </p>
+                </Reveal>
+              </div>
+              <Reveal delay={200}>
+                <ConversationVisual />
               </Reveal>
             </div>
-            <Reveal delay={200}>
-              <ConversationVisual />
-            </Reveal>
           </div>
         </section>
 
@@ -380,7 +348,7 @@ function Home() {
                   The people behind <span className="text-brand">Commitment.</span>
                 </>
               }
-              intro="Harvey and Artemis founded Commitment to bring exceptional, AI-powered customer service within reach of every ambitious business."
+              intro="Commitment was founded to bring exceptional, AI-powered customer service within reach of every ambitious business."
             />
             <div className="mt-14 grid gap-5 lg:grid-cols-2">
               {TEAM.map((m, k) => (
