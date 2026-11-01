@@ -15,11 +15,8 @@ const SIGNALS = [
 export function ConversationVisual() {
   return (
     <div className="relative rounded-[2rem] border-2 border-ink bg-paper p-4 sm:p-6 md:p-8">
-      <div className="mb-6 flex items-center justify-between gap-3 text-[11px]">
+      <div className="mb-6 text-[11px]">
         <span className="font-bold uppercase tracking-wider">Agent conversation</span>
-        <span className="rounded-full border border-border bg-background px-2.5 py-0.5 font-semibold uppercase tracking-wider text-muted-foreground">
-          Illustrative
-        </span>
       </div>
 
       {/* Customer */}
@@ -106,10 +103,6 @@ export function ConversationVisual() {
           <Mascot className="h-5 w-auto" />
         </span>
       </div>
-
-      <p className="mt-6 text-[11px] text-muted-foreground">
-        Fictional example for demonstration purposes.
-      </p>
     </div>
   );
 }

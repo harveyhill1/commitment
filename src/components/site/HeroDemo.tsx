@@ -14,7 +14,7 @@ import { Mascot } from "./Brand";
 import { cn } from "@/lib/utils";
 
 /*
- * Illustrative hero demo: Customer enquiry → native CRM → Commitment AI → automatic response.
+ * Hero demo: Customer enquiry → native CRM → Commitment AI → automatic response.
  * Everything here is static demonstration content for a fictional business; nothing is
  * connected to a real CRM or AI backend.
  */
@@ -27,30 +27,28 @@ const REPLY =
 
 const STEPS = [
   {
-    t: "Understands customer intent",
+    t: "Understand",
+    d: "Identifies intent and questions",
     chips: ["What's included", "Setup time", "Speak to someone"],
-    note: "3 questions detected",
+    note: "3 questions",
   },
   {
-    t: "Retrieves verified business knowledge",
+    t: "Retrieve",
+    d: "Searches verified business knowledge",
     chips: ["Packages guide", "Onboarding FAQ", "Team calendar"],
-    note: "3 sources matched",
+    note: "3 sources",
   },
   {
-    t: "Composes a personalised response",
+    t: "Respond",
+    d: "Writes and sends a personalised reply",
     chips: ["Answers all 3 questions", "Your brand voice"],
-    note: "Response ready",
-  },
-  {
-    t: "Checks against your business rules",
-    chips: ["Verified information", "Configured permissions"],
-    note: "All checks passed",
+    note: "Sent",
   },
 ];
 
 // Animation timeline (ms from start). Stage numbers:
-// 1 enquiry arrives · 2 flows to Commitment · 3–6 processing steps · 7 flows back · 8 reply sending
-const TIMELINE = [250, 1050, 1700, 2500, 3300, 4100, 4900, 5300];
+// 1 enquiry arrives · 2 flows to Commitment · 3–5 processing steps · 6 flows back · 7 reply sending
+const TIMELINE = [250, 1050, 1700, 2600, 3500, 4300, 4700];
 const FINAL = TIMELINE.length;
 
 function useInView<T extends Element>() {
@@ -102,7 +100,7 @@ export function HeroDemo() {
   const replyDone = stage >= FINAL && chars >= REPLY.length;
   // Step i is active at stage 3+i and complete from stage 4+i.
   const stepState = (i: number) => (stage >= 4 + i ? "done" : stage === 3 + i ? "active" : "idle");
-  const processing = stage >= 3 && stage < 7;
+  const processing = stage >= 3 && stage < 6;
 
   return (
     <div ref={ref} className="relative">
@@ -114,12 +112,6 @@ export function HeroDemo() {
             <span className="size-2.5 rounded-full bg-border" />
             <span className="size-2.5 rounded-full bg-border" />
             <span className="size-2.5 rounded-full bg-border" />
-            <div className="mx-auto hidden rounded-md bg-surface px-10 py-1 text-[11px] text-muted-foreground sm:block">
-              your-crm.example/inbox
-            </div>
-            <span className="ml-auto rounded-full border border-border bg-background px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground sm:ml-0">
-              Illustrative demo
-            </span>
           </div>
 
           <div className="grid text-[13px] lg:grid-cols-[150px_1fr]">
@@ -170,7 +162,6 @@ export function HeroDemo() {
                   <Search className="size-3.5" /> Inbox <span className="text-border">/</span>{" "}
                   <span className="font-semibold text-ink">Jamie Collins</span>
                 </span>
-                <span className="hidden sm:inline">Fictional data for demonstration</span>
               </div>
 
               {/* Flow: single column on mobile; thread ↔ AI panel on desktop */}
@@ -221,8 +212,8 @@ export function HeroDemo() {
                         : "border-border shadow-sm",
                     )}
                   >
-                    <div className="mb-4 flex items-center gap-3">
-                      <span className="relative flex size-11 shrink-0 items-center justify-center rounded-full border border-border bg-paper">
+                    <div className="mb-3 flex items-center gap-3 border-b border-border pb-3">
+                      <span className="relative flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-paper">
                         {processing && (
                           <span className="soft-pulse absolute inset-0 rounded-full bg-brand/25" />
                         )}
@@ -235,35 +226,35 @@ export function HeroDemo() {
                         <p
                           className={cn(
                             "text-[11px] font-medium",
-                            stage >= 7
+                            stage >= 6
                               ? "text-ink"
                               : processing
                                 ? "text-brand"
                                 : "text-muted-foreground",
                           )}
                         >
-                          {stage >= 7
+                          {stage >= 6
                             ? "Complete"
                             : processing
                               ? "Processing enquiry…"
                               : "Waiting for enquiries"}
                         </p>
                       </div>
-                      {stage >= 7 && (
+                      {stage >= 6 && (
                         <span className="pop-in ml-auto flex size-6 items-center justify-center rounded-full bg-slime ring-1 ring-ink">
                           <Check className="size-3.5" strokeWidth={3.5} />
                         </span>
                       )}
                     </div>
 
-                    <ol className="relative space-y-4">
+                    <ol className="relative space-y-3">
                       {STEPS.map((s, i) => {
                         const st = stepState(i);
                         return (
                           <li key={s.t} className="relative flex gap-3">
                             {i < STEPS.length - 1 && (
                               <span
-                                className="absolute left-[9px] top-6 h-[calc(100%-4px)] w-px bg-border"
+                                className="absolute left-[9px] top-6 h-[calc(100%-8px)] w-px bg-border"
                                 aria-hidden="true"
                               >
                                 <span
@@ -276,13 +267,34 @@ export function HeroDemo() {
                             )}
                             <StepDot state={st} />
                             <div className="min-w-0 flex-1 pb-0.5">
+                              <div className="flex items-baseline justify-between gap-2">
+                                <p
+                                  className={cn(
+                                    "font-semibold leading-snug transition-colors",
+                                    st === "idle" ? "text-ink/35" : "text-ink",
+                                  )}
+                                >
+                                  <span className="mr-1.5 text-[11px] text-brand">0{i + 1}</span>
+                                  {s.t}
+                                </p>
+                                {st !== "idle" && (
+                                  <span
+                                    className={cn(
+                                      "shrink-0 text-[10px] font-semibold uppercase tracking-wider",
+                                      st === "done" ? "text-muted-foreground" : "text-brand",
+                                    )}
+                                  >
+                                    {st === "done" ? s.note : "Working…"}
+                                  </span>
+                                )}
+                              </div>
                               <p
                                 className={cn(
-                                  "font-semibold leading-snug transition-colors",
-                                  st === "idle" ? "text-ink/35" : "text-ink",
+                                  "text-[11px] leading-snug transition-colors",
+                                  st === "idle" ? "text-ink/30" : "text-muted-foreground",
                                 )}
                               >
-                                {s.t}
+                                {s.d}
                               </p>
                               <div
                                 className={cn(
@@ -293,14 +305,6 @@ export function HeroDemo() {
                                 )}
                               >
                                 <div className="overflow-hidden">
-                                  <p
-                                    className={cn(
-                                      "mt-1 text-[10px] font-semibold uppercase tracking-wider",
-                                      st === "done" ? "text-muted-foreground" : "text-brand",
-                                    )}
-                                  >
-                                    {st === "done" ? s.note : "Working…"}
-                                  </p>
                                   <div className="mt-1.5 flex flex-wrap gap-1">
                                     {s.chips.map((c) => (
                                       <span
@@ -323,8 +327,8 @@ export function HeroDemo() {
 
                 {/* Stage 4 — response delivered back through the CRM */}
                 <Connector
-                  className="lg:col-start-2 lg:row-start-2 lg:self-end lg:pb-24"
-                  active={stage >= 7}
+                  className="lg:col-start-2 lg:row-start-2 lg:mt-4 lg:self-center"
+                  active={stage >= 6}
                   direction="left"
                   label="Sent automatically via your CRM"
                 />
@@ -333,7 +337,7 @@ export function HeroDemo() {
                   <div
                     className={cn(
                       "rounded-xl border bg-background p-3.5 transition-all duration-500",
-                      stage >= 7
+                      stage >= 6
                         ? "border-ink/80 opacity-100 shadow-sm"
                         : "translate-y-2 border-border opacity-0",
                     )}
@@ -377,8 +381,7 @@ export function HeroDemo() {
                 </div>
               </div>
 
-              <div className="mt-4 flex items-center justify-between gap-3 border-t border-border pt-3 text-[11px] text-muted-foreground">
-                <span>Illustrative example using a fictional business. Not a live system.</span>
+              <div className="mt-4 flex items-center justify-end border-t border-border pt-3 text-[11px]">
                 <button
                   type="button"
                   onClick={() => setRun((r) => r + 1)}
